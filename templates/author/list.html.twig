@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Atelier num_3 </title>
+    </head>
+    <body>
+        <h1> TP Création d’un Template avec Twig </h1>
+        Liste des autheurs : <br>
+        
+        {% if authors is not empty %} 
+        <ul>  {% for author in authors %} 
+            <li> 
+                  id : {{author.id}}  <br>
+                  image : <img src="{{asset(author.picture)}}" alt="{{author.username}} picture"> <br>
+                  name : {{author.username | upper}} <br>
+                  email : {{author.email}} <br>
+                  nb_books : {{author.nb_books}} <br>
+                  
+                  <a href="{{path('details', {'id' : author.id}) }}"> Details </a>
+                
+            </li> 
+            
+            {% endfor %}
+        </ul>
+       {% else %} 
+            <p> list des autheur n'exist pas <p> 
+            {% endif %} 
+
+            <p> nombre des auteurs : <br> {{authors | length}} </p> <br>
+
+            {% set totalBooks = 0 %}
+            {% for author in authors %}
+                {% set totalBooks = totalBooks + author.nb_books %}
+            {% endfor %}
+           
+             <p> le nombre total des livres de tous les auteurs : <br> {{totalBooks}} </p> <br>
+             
+
+    </body>
+ </html>
